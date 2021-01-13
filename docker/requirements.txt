@@ -1,0 +1,8 @@
+gym
+wandb
+PyYAML
+numpy
+scipy
+tqdm
+wheel
+box2d-py
