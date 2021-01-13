@@ -63,49 +63,47 @@ class EpsScheduler:
         return self.initial_p + fraction * (self.final_p - self.initial_p)
 
 
-def build_q_function_network():
+
+def build_q_function_network(input_shape, num_actions):
     """
     Returns the network used for the prediction and target network
     """
+    # base network without top layer
+    input = tf.keras.Input(input_shape)
+    base_layers = input
+    for i in range(2):
+        base_layers = tf.keras.layers.Dense(units=64, activation=tf.keras.activations.relu)(base_layers)
 
-    def q_func_builder(input_shape, num_actions):
-        # base network without top layer
-        input = tf.keras.Input(input_shape)
-        base_layers = input
-        for i in range(2):
-            base_layers = tf.keras.layers.Dense(units=64, activation=tf.keras.activations.relu)(base_layers)
+    input_network = tf.keras.Model(inputs=[input], outputs=[base_layers])
 
-        input_network = tf.keras.Model(inputs=[input], outputs=[base_layers])
+    # extend base network with two heads: action-value network and state-value network
+    latent = tf.keras.layers.Flatten()(input_network.outputs[0])
 
-        # extend base network with two heads: action-value network and state-value network
-        latent = tf.keras.layers.Flatten()(input_network.outputs[0])
+    with tf.name_scope("state-value"):
+        state_head = latent
+        state_head = tf.keras.layers.Dense(units=128, activation=None)(state_head)
+        state_head = tf.nn.relu(state_head)
+        state_score = tf.keras.layers.Dense(units=1, activation=None)(state_head)
 
-        with tf.name_scope("state-value"):
-            state_head = latent
-            state_head = tf.keras.layers.Dense(units=256, activation=None)(state_head)
-            state_head = tf.nn.relu(state_head)
-            state_score = tf.keras.layers.Dense(units=1, activation=None)(state_head)
+    with tf.name_scope("action-value"):
+        action_head = latent
+        action_head = tf.keras.layers.Dense(units=128, activation=None)(action_head)
+        action_head = tf.nn.relu(action_head)
+        action_scores = tf.keras.layers.Dense(units=num_actions, activation=None)(action_head)
 
-        with tf.name_scope("action-value"):
-            action_head = latent
-            action_head = tf.keras.layers.Dense(units=256, activation=None)(action_head)
-            action_head = tf.nn.relu(action_head)
-            action_scores = tf.keras.layers.Dense(units=num_actions, activation=None)(action_head)
+    action_scores_mean = tf.reduce_mean(action_scores, 1)
+    action_scores_centered = action_scores - tf.expand_dims(action_scores_mean, 1)
+    q_out = action_scores_centered + state_score
 
-        action_scores_mean = tf.reduce_mean(action_scores, 1)
-        action_scores_centered = action_scores - tf.expand_dims(action_scores_mean, 1)
-        q_out = action_scores_centered + state_score
+    model = tf.keras.Model(inputs=input_network.inputs, outputs=[q_out])
+    print(model.summary())
+    return model
 
-        model = tf.keras.Model(inputs=input_network.inputs, outputs=[q_out])
-        print(model.summary())
-        return model
-
-    return q_func_builder
 
 
 class DeepQLearning(tf.Module):
 
-    def __init__(self, q_function, observations_shape, number_of_actions, lr, gamma):
+    def __init__(self, observations_shape, number_of_actions, lr, gamma):
 
         self.number_of_actions = number_of_actions
         self.gamma = gamma
@@ -119,21 +117,21 @@ class DeepQLearning(tf.Module):
         # from the prediction network are copied to the target network. This leads to more stable training because
         # it keeps the target function fixed (for a while)
         with tf.name_scope('q_network'):
-            self.q_network = q_function(observations_shape, number_of_actions)
+            self.q_network = build_q_function_network(observations_shape, number_of_actions)
         with tf.name_scope('target_q_network'):
-            self.target_q_network = q_function(observations_shape, number_of_actions)
+            self.target_q_network = build_q_function_network(observations_shape, number_of_actions)
         self.eps = tf.Variable(0., name="eps")
 
     @tf.function
-    def step(self, obs, eps=-1):
+    def step(self, observation, eps=-1):
         """
-        Select an action:
+        Select an action with the prediction network:
         First, get the Q-values from the Q-Network. Then calculate the best possible action (argmax).
         Then either select this best possible action or a random action (depending on eps, eps reduces over time).
         """
-        q_values = self.q_network(obs)
+        q_values = self.q_network(observation)
         best_actions = tf.argmax(q_values, axis=1)
-        batch_size = tf.shape(obs)[0]
+        batch_size = tf.shape(observation)[0]
         random_actions = tf.random.uniform(tf.stack([batch_size]), minval=0, maxval=self.number_of_actions,
                                            dtype=tf.int64)
         chose_random = tf.random.uniform(tf.stack([batch_size]), minval=0, maxval=1, dtype=tf.float32) < self.eps
@@ -156,7 +154,6 @@ class DeepQLearning(tf.Module):
             q_values = self.q_network(observation)
             q_values_selected = tf.reduce_sum(q_values * tf.one_hot(actions, self.number_of_actions, dtype=tf.float32),
                                               1)
-
             q_values_target = self.target_q_network(new_observation)
 
             # Double Q-Learning: Use online and offline network
@@ -164,9 +161,6 @@ class DeepQLearning(tf.Module):
             best_q_values_target_online = tf.argmax(q_values_target_online, 1)
             best_q_values_online = tf.reduce_sum(
                 q_values_target * tf.one_hot(best_q_values_target_online, self.number_of_actions, dtype=tf.float32), 1)
-
-            # Without Double Q-Learning
-            # best_q_values_online = tf.reduce_max(q_values_target, 1)
 
             dones = tf.cast(dones, best_q_values_online.dtype)
             best_q_values_online_without_dones = (1.0 - dones) * best_q_values_online
@@ -246,10 +240,8 @@ def load_checkpoints(conf, model):
 
 def train(env, conf):
     logger = loghandler.LogHandler(conf, trigger='episodes')
-    q_func = build_q_function_network()
 
     model = DeepQLearning(
-        q_function=q_func,
         observations_shape=env.observation_space.shape,
         number_of_actions=env.action_space.n,
         lr=conf['lr'],
@@ -260,7 +252,8 @@ def train(env, conf):
     replay_buffer = ReplayBuffer(conf['buffer_size'])
     exploration_scheduler = EpsScheduler(
         number_of_timesteps=int(conf['exploration_fraction'] * conf['total_timesteps']),
-        initial_eps=1.0, final_eps=conf['exploration_final_eps'])
+        initial_eps=1.0,
+        final_eps=conf['exploration_final_eps'])
 
     model.update_target()
     episode_rewards = [0.0]
@@ -270,9 +263,9 @@ def train(env, conf):
     for t in range(conf['total_timesteps']):
         kwargs = {}
         logs = {}
-        updated_eps_value = tf.constant(exploration_scheduler.value(t))
+        updated_eps = tf.constant(exploration_scheduler.value(t))
 
-        action = model.step(tf.constant(observation), eps=updated_eps_value, **kwargs)
+        action = model.step(tf.constant(observation), eps=updated_eps, **kwargs)
         action = action[0].numpy()
         new_observation, reward, done, _ = env.step(action)
 
@@ -286,28 +279,29 @@ def train(env, conf):
 
         # Update the network (minimize error in Bellman's equation)
         if t > conf['learning_starts'] and t % conf['train_freq'] == 0:
-            observation, actions, rewards, new_observation, dones = replay_buffer.get_minibatch(conf['batch_size'])
-            weights = np.ones_like(rewards)
-            observation, new_observation = tf.constant(observation), tf.constant(new_observation)
+            observation_t, actions, rewards, new_observation_t, dones = replay_buffer.get_minibatch(conf['batch_size'])
+            weights, batch_idxes = np.ones_like(rewards), None
+            observation_t, new_observation_t = tf.constant(observation_t), tf.constant(new_observation_t)
             actions, rewards, dones = tf.constant(actions), tf.constant(rewards), tf.constant(dones)
             weights = tf.constant(weights)
-            td_errors = model.train(observation, actions, rewards, new_observation, dones, weights)
+            td_errors = model.train(observation_t, actions, rewards, new_observation_t, dones, weights)
 
         # Copy parameters to target network
         if t > conf['learning_starts'] and t % conf['target_network_update_freq'] == 0:
             model.update_target()
 
-        mean_reward_100_episods = round(np.mean(episode_rewards[-101:-1]), 1)
+        mean_reward_100_eps = round(np.mean(episode_rewards[-101:-1]), 1)
         num_episodes = len(episode_rewards)
 
         logs["steps"] = t
         logs["episodes"] = num_episodes
-        logs["mean reward in 100 episodes"] = mean_reward_100_episods
+        logs["reward"] = mean_reward_100_eps
+        logs["mean 100 episode reward"] = mean_reward_100_eps
         logs["% time spent exploring"] = int(100 * exploration_scheduler.value(t))
         logger.log(logs)
 
-        if t > 150000 and mean_reward_100_episods > best_reward:
-            best_reward = mean_reward_100_episods
+        if t > 110000 and mean_reward_100_eps > best_reward:
+            best_reward = mean_reward_100_eps
             save_path = os.path.expanduser('best_models/deepq')
             ckpt = tf.train.Checkpoint(model=model)
             manager = tf.train.CheckpointManager(ckpt, save_path, max_to_keep=None)
@@ -320,9 +314,7 @@ def val(env, conf):
     if conf['load_path'] is None or conf['load_path'] is 'None':
         raise AttributeError("Load path must be defined to validate model!!!")
 
-    q_func = build_q_function_network()
     model = DeepQLearning(
-        q_function=q_func,
         observations_shape=env.observation_space.shape,
         number_of_actions=env.action_space.n,
         lr=conf['lr'],
