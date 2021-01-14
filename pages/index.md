@@ -1,3 +1,0 @@
-# Deep RL Bootcamp - Hackathon
-
-

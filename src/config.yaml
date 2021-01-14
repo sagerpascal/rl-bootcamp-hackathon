@@ -1,0 +1,43 @@
+algorithm: a2c
+log_console_freq: 100 # 300 for DQN/A2C, 1 for PPO2
+log_wandb_freq: 100 # 1000 for DQN/A2C, 1 for PPO2
+use_wandb: True
+mode: train  # either train or val
+num_env: 20  # number of envs in parallel -> 9 for a2c, 1 for deepq
+
+#algorithm: ppo2
+#log_console_freq: 1 # 300 for DQN/A2C, 1 for PPO2
+#log_wandb_freq: 1 # 1000 for DQN/A2C, 1 for PPO2
+#use_wandb: True
+#mode: train  # either train or val
+#num_env: 10  # number of envs in parallel -> 9 for a2c, 1 for deepq
+
+##########################################################################
+# A2C and PPO2 parameters
+##########################################################################
+nsteps: 5 # 5 for PPO2  # number of steps of the vectorized environment per update
+
+
+##########################################################################
+# Deep Q-Learning parameters
+##########################################################################
+exploration_fraction: 0.1 # 0.1
+total_timesteps: 1000000
+exploration_final_eps: 0.01
+buffer_size: 200000
+train_freq: 1
+batch_size: 64
+learning_starts: 10000
+target_network_update_freq: 1000
+
+
+##########################################################################
+# PPO2 parameters
+##########################################################################
+cliprange: 0.1
+n_steps_ppo2: 2048
+nminibatches_ppo2: 64
+total_timesteps_ppo2: 5000000
+noptepochs: 16
+
+
