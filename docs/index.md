@@ -10,7 +10,7 @@ permalink: /
 - My final presentation: [Presentation](/rl-bootcamp-hackathon/presentation)
 
 # About this Page
-In my master studies I am taking the course EVA-MI_Lab. In this course we learn the basics and also some advanced concepts about Reinforcment Learning. Instead of an exam, we get graded by the results of a three-day hackathon. We are then graded based on this hackathon. I have documented my results on this page. Since the focus was mainly on implementation, I could only put the minimal amount of effort into this page. So sorry for any design issues or spelling mistakes :).
+In my master studies I am taking the course EVA-MI_Lab. In this course we learn the basics and also some advanced concepts about Reinforcment Learning. Instead of an exam, we get graded by the results of a three-day hackathon. I have documented my results on this page. Since the focus was mainly on the implementation, I could only put the minimal amount of effort into this page. So sorry for any design issues or spelling mistakes :).
 
 # About the Author
 
