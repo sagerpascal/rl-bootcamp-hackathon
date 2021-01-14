@@ -5,15 +5,15 @@ permalink: /algorithms
 ---
 
 # Navigation
-- [Home](/)
-- [Procedure](/procedure)
-- [Results](/results)
-- [Presentation](/presentation)
+- [Home](/rl-bootcamp-hackathon)
+- [Procedure](/rl-bootcamp-hackathon/procedure)
+- [Results](/rl-bootcamp-hackathon/results)
+- [Presentation](/rl-bootcamp-hackathon/presentation)
 
 
 
 # Selection of the Algorithms
-On this page only the used algorithms are roughly described. How these algorithms were selected is described under [Procedure](/procedure).
+On this page only the used algorithms are roughly described. How these algorithms were selected is described under [Procedure](/rl-bootcamp-hackathon/procedure).
 
 # On-Policy vs. Off-Policy
 

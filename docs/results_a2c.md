@@ -5,15 +5,15 @@ permalink: /results_a2c
 ---
 
 # Navigation
-- [Home](/)
-- [Procedure](/procedure)
-- [Algorithms](/algorithms)
-- [Results](/results)
-  - [Results DQN](/results_dqn)
-  - [Results PPO](/results_ppo2)
-  - [Results A2C](/results_a2c)
-  - [Results DDPG](/results_ddpg)
-- [Presentation](/presentation)
+- [Home](/rl-bootcamp-hackathon/)
+- [Procedure](/rl-bootcamp-hackathon/procedure)
+- [Algorithms](/rl-bootcamp-hackathon/algorithms)
+- [Results](/rl-bootcamp-hackathon/results)
+  - [Results DQN](/rl-bootcamp-hackathon/results_dqn)
+  - [Results PPO](/rl-bootcamp-hackathon/results_ppo2)
+  - [Results A2C](/rl-bootcamp-hackathon/results_a2c)
+  - [Results DDPG](/rl-bootcamp-hackathon/results_ddpg)
+- [Presentation](/rl-bootcamp-hackathon/presentation)
 
 
 
@@ -24,7 +24,7 @@ Therefore, I put the focus more on speed than stability.
 ## Network Architecture
 I have tried different, relatively small networks. In the end, a network with 2 layers and 64 units each achieved the best performance.
 
-<img src="\assets\images\a2c\different_architecture.png" alt="different_architecture"/>
+<img src="\rl-bootcamp-hackathon\assets\images\a2c\different_architecture.png" alt="different_architecture"/>
 
 The used network looks as follows:
 
@@ -48,20 +48,20 @@ _________________________________________________________________
 Since I implemented parallel environments for PPO2 (see [Results PPO](/results_ppo2)), I used this for A2C as well:
 
 **FPS:**
-<img src="\assets\images\a2c\different_envs_fps.png" alt="different_envs_fps"/>
+<img src="\rl-bootcamp-hackathon\assets\images\a2c\different_envs_fps.png" alt="different_envs_fps"/>
 
 **Reward:**
-<img src="\assets\images\a2c\different_envs_reward.png" alt="different_envs_reward"/>
+<img src="\rl-bootcamp-hackathon\assets\images\a2c\different_envs_reward.png" alt="different_envs_reward"/>
 
 ## Different Optimizers and Schedulers
 
 I tried different combinations of optimizers and schedulers (only a few of them plotted below):
 
 **Different Optimizers:**
-<img src="\assets\images\a2c\different_optimizers.png" alt="different_optimizers"/>
+<img src="\rl-bootcamp-hackathon\assets\images\a2c\different_optimizers.png" alt="different_optimizers"/>
 
 **Different Schedulers:**
-<img src="\assets\images\a2c\different_scheduler.png" alt="different_scheduler"/>
+<img src="\rl-bootcamp-hackathon\assets\images\a2c\different_scheduler.png" alt="different_scheduler"/>
 
 In the end I was a little lucky and found a combination that is bit unstable but very fast. Since I wanted to achieve a 
 solution which wins the game as fast as possible I used this combination of linear scheduler and RMSprop optimizer.

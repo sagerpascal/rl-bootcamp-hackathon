@@ -5,10 +5,15 @@ permalink: /results
 ---
 
 # Navigation
-- [Home](/)
-- [Procedure](/procedure)
-- [Algorithms](/algorithms)
-- [Presentation](/presentation)
+- [Home](/rl-bootcamp-hackathon/)
+- [Procedure](/rl-bootcamp-hackathon/procedure)
+- [Algorithms](/rl-bootcamp-hackathon/algorithms)
+- [Results](/rl-bootcamp-hackathon/results)
+  - [Results DQN](/rl-bootcamp-hackathon/results_dqn)
+  - [Results PPO](/rl-bootcamp-hackathon/results_ppo2)
+  - [Results A2C](/rl-bootcamp-hackathon/results_a2c)
+  - [Results DDPG](/rl-bootcamp-hackathon/results_ddpg)
+- [Presentation](/rl-bootcamp-hackathon/presentation)
 
 # Results
 
@@ -33,8 +38,9 @@ For example, DQN takes many episodes even though the game is won in 10 minutes. 
 | DDPG         | Not won yet!           | 0                   |
 
 
+
 ## Results of the different Algorithms:
-- [Results DQN](/results_dqn)
-- [Results PPO](/results_ppo2)
-- [Results A2C](/results_a2c)
-- [Results DDPG](/results_ddpg)
+- [Results DQN](/rl-bootcamp-hackathon/results_dqn)
+- [Results PPO](/rl-bootcamp-hackathon/results_ppo2)
+- [Results A2C](/rl-bootcamp-hackathon/results_a2c)
+- [Results DDPG](/rl-bootcamp-hackathon/results_ddpg)

@@ -5,10 +5,10 @@ permalink: /procedure
 ---
 
 # Navigation
-- [Home](/)
-- [Algorithms](/algorithms)
-- [Results](/results)
-- [Presentation](/presentation)
+- [Home](/rl-bootcamp-hackathon/)
+- [Algorithms](/rl-bootcamp-hackathon/algorithms)
+- [Results](/rl-bootcamp-hackathon/results)
+- [Presentation](/rl-bootcamp-hackathon/presentation)
 
 
 # Definition of the Problem Space

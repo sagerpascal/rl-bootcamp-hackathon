@@ -5,15 +5,15 @@ permalink: /results_dqn
 ---
 
 # Navigation
-- [Home](/)
-- [Procedure](/procedure)
-- [Algorithms](/algorithms)
-- [Results](/results)
-  - [Results DQN](/results_dqn)
-  - [Results PPO](/results_ppo2)
-  - [Results A2C](/results_a2c)
-  - [Results DDPG](/results_ddpg)
-- [Presentation](/presentation)
+- [Home](/rl-bootcamp-hackathon/)
+- [Procedure](/rl-bootcamp-hackathon/procedure)
+- [Algorithms](/rl-bootcamp-hackathon/algorithms)
+- [Results](/rl-bootcamp-hackathon/results)
+  - [Results DQN](/rl-bootcamp-hackathon/results_dqn)
+  - [Results PPO](/rl-bootcamp-hackathon/results_ppo2)
+  - [Results A2C](/rl-bootcamp-hackathon/results_a2c)
+  - [Results DDPG](/rl-bootcamp-hackathon/results_ddpg)
+- [Presentation](/rl-bootcamp-hackathon/presentation)
 
 
 
@@ -29,7 +29,7 @@ After implementing an initial version, I started testing different network archi
 One of the biggest improvements was achieved by using a different activation function. After switching from `tanh` to `relu`, the 
 reward was much more stable *(note: this plot was recorded only after an initial parameter tuning, so a reward of >200 was already achieved)*:
 
-<img src="\assets\images\deepq\different_activation.png" alt="different_activation"/>
+<img src="\rl-bootcamp-hackathon\assets\images\deepq\different_activation.png" alt="different_activation"/>
 
 **Overall, using ReLU has led to much more stable results!**
 
@@ -39,7 +39,7 @@ Starting from the basic version, I tried different number of layers and neurons.
 I compared the networks by measuring the reward per time (and not per episode). I did this because I wanted to favor 
 higher performing networks. However, the result is for both versions (per time or per episods) almost the same.
 
-<img src="\assets\images\deepq\different_architectures.png" alt="different_architectures"/>
+<img src="\rl-bootcamp-hackathon\assets\images\deepq\different_architectures.png" alt="different_architectures"/>
 
 The best result was achieved with a rather small network with 22,021 parameters.
 
@@ -48,7 +48,7 @@ To further improve the result I read trough the article [https://.manning.com//g
 and also compared my implementation with the OpenAI baseline. Both sources have recommended a Huber loss-function. 
 Therefore I compared this loss function with the MSE loss which was used in the original paper ([https://arxiv.org/abs/1312.5602](https://arxiv.org/abs/1312.5602)).
 
-<img src="\assets\images\deepq\square_loss_vs_huber_loss.png" alt="square_loss_vs_huber_loss"/>
+<img src="\rl-bootcamp-hackathon\assets\images\deepq\square_loss_vs_huber_loss.png" alt="square_loss_vs_huber_loss"/>
 
 Unfortunately, this only brought a slight improvement, but since I had already implemented the Huber loss function, I kept it.
 
@@ -56,7 +56,7 @@ Unfortunately, this only brought a slight improvement, but since I had already i
 I also compared Q-Learning with Double Q-Learning. 
 > Because the future maximum approximated action value in Q-learning is evaluated using the same Q function as in current action selection policy, in noisy environments Q-learning can sometimes overestimate the action values, slowing the learning. A variant called Double Q-learning was proposed to correct this. (source: [https://en.wikipedia.org/wiki/Q-learning](https://en.wikipedia.org/wiki/Q-learning)) 
 
-<img src="\assets\images\deepq\Q_Learning_vs_Double_Q_Learning.png" alt="Q_Learning_vs_Double_Q_Learning"/>
+<img src="\rl-bootcamp-hackathon\assets\images\deepq\Q_Learning_vs_Double_Q_Learning.png" alt="Q_Learning_vs_Double_Q_Learning"/>
 
 **Double Q-learning has mainly made the result more stable.**
 
@@ -70,17 +70,17 @@ Many different parameters could be tried out. However, the most influential ones
 I have therefore limited myself to these parameters. First, I performed tests with the individual parameters to make sure that they have the expected influence and also to get a feeling for them.
 
 **Different Buffer Size:**
-<img src="\assets\images\deepq\different_buffer_size.png" alt="different_buffer_size"/>
+<img src="\rl-bootcamp-hackathon\assets\images\deepq\different_buffer_size.png" alt="different_buffer_size"/>
 
 **Different Gamma:**
-<img src="\assets\images\deepq\mean_reward_different_gamma.png" alt="mean_reward_different_gamma"/>
+<img src="\rl-bootcamp-hackathon\assets\images\deepq\mean_reward_different_gamma.png" alt="mean_reward_different_gamma"/>
 
 **Different Learning Rate:**
-<img src="\assets\images\deepq\different_lr.png" alt="different_lr"/>
+<img src="\rl-bootcamp-hackathon\assets\images\deepq\different_lr.png" alt="different_lr"/>
 
 **Epsilon Decay:**
-<img src="\assets\images\deepq\eps_decay_reward.png" alt="eps_decay_reward"/>
-<img src="\assets\images\deepq\eps_decay_exploration_time.png" alt="eps_decay_exploration_time"/>
+<img src="\rl-bootcamp-hackathon\assets\images\deepq\eps_decay_reward.png" alt="eps_decay_reward"/>
+<img src="\rl-bootcamp-hackathon\assets\images\deepq\eps_decay_exploration_time.png" alt="eps_decay_exploration_time"/>
 
 After this exploration I wanted to run sweeps, but didn't have enough time. It is likely that the performance could be optimized even further.
 Additionally, other hyperparameters such as the batch size should also be examined.
@@ -88,4 +88,4 @@ Additionally, other hyperparameters such as the batch size should also be examin
 # Stability
 DQN achieves good results relatively quickly, but one problem is stability. After the game is won for the first time, the algorithm has strong fluctuations. So far, it has not been found out what exactly causes this. Some modifications like the adjustment of the loss function have reduced these fluctuations, but they are still strong.
 
-<img src="\assets\images\deepq\stability.png" alt="stability"/>
+<img src="\rl-bootcamp-hackathon\assets\images\deepq\stability.png" alt="stability"/>
