@@ -1,1 +1,18 @@
 theme: jekyll-theme-tactile
+
+markdown: kramdown
+
+# File exclusions
+exclude:
+- Gemfile
+- Gemfile.lock
+- presentation-rl-bootcamp.md
+
+# Site settings
+url: 'https://sagerpascal.github.io/rl-bootcamp-hackathon/'
+baseurl: ''
+title: 'Reinforcment Learning Hackathon @ZHAW'
+description: 'Results from Pascal Sager'
+permalink: pretty
+
+
