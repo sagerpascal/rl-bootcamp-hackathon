@@ -70,7 +70,8 @@ solution which wins the game as fast as possible I used this combination of line
 I tried different hyperparameters, but did not do any tuning with grid search or random search. Nevertheless, this was enough to win the game rather quickly.
 
 **Different Gamma:**
+<img src="\rl-bootcamp-hackathon\assets\images\a2c\different_gamma.png" alt="different_gamma"/>
 
 **Different Learning Rate:**
-
+<img src="\rl-bootcamp-hackathon\assets\images\a2c\different_lr.png" alt="different_lr"/>
 

@@ -105,14 +105,45 @@ What we have seen so far is that clipping serves as a regularizer by removing in
 PPO trains a stochastic policy in an on-policy way. This means that it explores by sampling actions according to the latest version of its stochastic policy. The amount of randomness in action selection depends on both initial conditions and the training procedure. Over the course of training, the policy typically becomes progressively less random, as the update rule encourages it to exploit rewards that it has already found. This may cause the policy to get trapped in local optima.
 
 
-
 #### Pseudocode
 
 ![https://spinningup.openai.com/en/latest/_images/math/e62a8971472597f4b014c2da064f636ffe365ba3.svg](https://spinningup.openai.com/en/latest/_images/math/e62a8971472597f4b014c2da064f636ffe365ba3.svg)
 
 
 
+# Advantage Actor-Critic
 
+According to the policy based gradient (see [https://towardsdatascience.com/policy-gradient-step-by-step-ac34b629fd55](https://towardsdatascience.com/policy-gradient-step-by-step-ac34b629fd55)) we have defined an objective function and computed its gradient as follows:
+
+<img  src="https://latex.codecogs.com/svg.latex?\Large&space;\nabla_\theta J(\theta)=\frac{1}{m} \sum_{i=1}^{m} \sum_{t=0}^T \nabla_{\theta} \log \pi_\theta (a_t|s_t)R_t">
+
+
+
+What this equation tells us is that the gradient of <img style="height: 14px;" src="https://latex.codecogs.com/svg.latex?\Large&space;J(\theta)"> is the average of all m trajectories, where each trajectory is the sum of the steps that compose it. At each of this step we compute the derivative of the log of the policy <img style="height: 10px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\pi"> and multiply it by the return <img style="height: 12px;" src="https://latex.codecogs.com/svg.latex?\Large&space;R_t"> In other words we are trying to find how the policy varies following <img style="height: 14px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\theta">. 
+
+The <img style="height: 15px;" src="https://latex.codecogs.com/svg.latex?\Large&space;R_t"> (return starting at step t) is not bad, but we are not really sure what value of Rt is considered good enough to be taken into consideration?! One way to give a meaning to this number is by comparing it to a reference, or what we call a **baseline**. Baselines can take several forms, one of them is the expected performance or in other terms the average performance. Let’s denote the baseline as <img style="height: 12px;" src="https://latex.codecogs.com/svg.latex?\Large&space;b_t">, the gradient of the objective function becomes:
+
+<img  src="https://latex.codecogs.com/svg.latex?\Large&space;\nabla_\theta J(\theta)=\frac{1}{m} \sum_{i=1}^{m} \sum_{t=0}^T \nabla_{\theta} \log \pi_\theta (a_t|s_t)(R_t-b_t)">
+
+The equation can be rewritten as
+
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;\nabla_\theta J(\theta)=\frac{1}{m} \sum_{i=1}^{m} \sum_{t=0}^T \nabla_{\theta} \log \pi_\theta (a_t|s_t)(Q(s_t,a_t)-V_\phi(s_t))">
+
+If we look closely at the equation above, we see that <img style="height: 12px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_\theta (a_t|s_t)"> is what performs the action (remember <img style="height: 10px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\pi"> is the probability of action <img style="height: 10px;" src="https://latex.codecogs.com/svg.latex?\Large&space;a"> is taken at state <img style="height: 10px;" src="https://latex.codecogs.com/svg.latex?\Large&space;s">), while <img style="height: 15px;" src="https://latex.codecogs.com/svg.latex?\Large&space;Q(s_t,a_t)-V_\phi(s_t)"> tells us how valuable it is. In other terms <img style="height: 12px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_\theta (a_t|s_t)"> is the actor, <img style="height: 15px;" src="https://latex.codecogs.com/svg.latex?\Large&space;Q(s_t,a_t)-V_\phi(s_t)"> is the critic.
+
+
+
+Computation of the Critic can have different flavors :
+
+- Q Actor-Critic (two networks)
+- **Advantage Actor-Critic**
+- TD Actor-Critic
+- TD(<img style="height: 12px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\lambda">) Actor-Critic
+- Natural Actor-Critic
+
+
+
+In my implementation I used advantage Actor Critic. This is basically the synchronous implementation of A3C. A2C is like A3C but without the asynchronous part; this means a single-worker variant of the A3C. It was empirically found that A2C produces comparable performance to A3C while being more efficient. On each learning step, we update both the Actor parameter (with policy gradients and advantage value), and the Critic parameter (with minimizing the mean squared error with the Bellman update equation). 
 
 # Deep Deterministic Policy Gradient
 
@@ -168,42 +199,6 @@ DDPG trains a deterministic policy in an off-policy way. Because the policy is d
 ![](https://spinningup.openai.com/en/latest/_images/math/5811066e89799e65be299ec407846103fcf1f746.svg)
 
 
-
-
-
-# Advantage Actor-Critic
-
-According to the policy based gradient (see [https://towardsdatascience.com/policy-gradient-step-by-step-ac34b629fd55](https://towardsdatascience.com/policy-gradient-step-by-step-ac34b629fd55)) we have defined an objective function and computed its gradient as follows:
-
-<img  src="https://latex.codecogs.com/svg.latex?\Large&space;\nabla_\theta J(\theta)=\frac{1}{m} \sum_{i=1}^{m} \sum_{t=0}^T \nabla_{\theta} \log \pi_\theta (a_t|s_t)R_t">
-
-
-
-What this equation tells us is that the gradient of <img style="height: 14px;" src="https://latex.codecogs.com/svg.latex?\Large&space;J(\theta)"> is the average of all m trajectories, where each trajectory is the sum of the steps that compose it. At each of this step we compute the derivative of the log of the policy <img style="height: 10px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\pi"> and multiply it by the return <img style="height: 12px;" src="https://latex.codecogs.com/svg.latex?\Large&space;R_t"> In other words we are trying to find how the policy varies following <img style="height: 14px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\theta">. 
-
-The <img style="height: 15px;" src="https://latex.codecogs.com/svg.latex?\Large&space;R_t"> (return starting at step t) is not bad, but we are not really sure what value of Rt is considered good enough to be taken into consideration?! One way to give a meaning to this number is by comparing it to a reference, or what we call a **baseline**. Baselines can take several forms, one of them is the expected performance or in other terms the average performance. Let’s denote the baseline as <img style="height: 12px;" src="https://latex.codecogs.com/svg.latex?\Large&space;b_t">, the gradient of the objective function becomes:
-
-<img  src="https://latex.codecogs.com/svg.latex?\Large&space;\nabla_\theta J(\theta)=\frac{1}{m} \sum_{i=1}^{m} \sum_{t=0}^T \nabla_{\theta} \log \pi_\theta (a_t|s_t)(R_t-b_t)">
-
-The equation can be rewritten as
-
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;\nabla_\theta J(\theta)=\frac{1}{m} \sum_{i=1}^{m} \sum_{t=0}^T \nabla_{\theta} \log \pi_\theta (a_t|s_t)(Q(s_t,a_t)-V_\phi(s_t))">
-
-If we look closely at the equation above, we see that <img style="height: 12px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_\theta (a_t|s_t)"> is what performs the action (remember <img style="height: 10px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\pi"> is the probability of action <img style="height: 10px;" src="https://latex.codecogs.com/svg.latex?\Large&space;a"> is taken at state <img style="height: 10px;" src="https://latex.codecogs.com/svg.latex?\Large&space;s">), while <img style="height: 15px;" src="https://latex.codecogs.com/svg.latex?\Large&space;Q(s_t,a_t)-V_\phi(s_t)"> tells us how valuable it is. In other terms <img style="height: 12px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_\theta (a_t|s_t)"> is the actor, <img style="height: 15px;" src="https://latex.codecogs.com/svg.latex?\Large&space;Q(s_t,a_t)-V_\phi(s_t)"> is the critic.
-
-
-
-Computation of the Critic can have different flavors :
-
-- Q Actor-Critic (two networks)
-- **Advantage Actor-Critic**
-- TD Actor-Critic
-- TD(<img style="height: 12px;" src="https://latex.codecogs.com/svg.latex?\Large&space;\lambda">) Actor-Critic
-- Natural Actor-Critic
-
-
-
-In my implementation I used advantage Actor Critic. This is basically the synchronous implementation of A3C. A2C is like A3C but without the asynchronous part; this means a single-worker variant of the A3C. It was empirically found that A2C produces comparable performance to A3C while being more efficient. On each learning step, we update both the Actor parameter (with policy gradients and advantage value), and the Critic parameter (with minimizing the mean squared error with the Bellman update equation). 
 
 
 Sources:
