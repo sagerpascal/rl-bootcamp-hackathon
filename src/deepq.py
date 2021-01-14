@@ -331,5 +331,5 @@ def val(env, conf):
         done_any = done.any() if isinstance(done, np.ndarray) else done
         if done_any:
             for i in np.nonzero(done)[0]:
-                print('episode_rew={}'.format(episode_rew[i]))
+                print('reward in episode={}'.format(episode_rew[i]))
                 episode_rew[i] = 0
