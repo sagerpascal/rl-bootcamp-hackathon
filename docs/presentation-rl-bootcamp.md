@@ -83,6 +83,25 @@ Environment
 ---
 
 <div class=custom-header>
+Procedure
+</div>
+
+**Approach:**
+
+1. Setup docker on the GPU-cluster
+2. Select the algorithm
+3. Implement simple basis version
+4. Compare with high-end implementations and improve the algorithm
+5. Tuning
+
+**Principles:**
+- Quality before quantity: Good performance over many different algorithm
+- **Work like hell :)**
+
+
+---
+
+<div class=custom-header>
 Selection of the Algorithms
 </div>
 
