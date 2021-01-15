@@ -91,9 +91,10 @@ Procedure
 
 1. Setup docker on the GPU-cluster
 2. Select the algorithm
-3. Implement simple basis version
+3. Implement simple basic version
 4. Compare with high-end implementations and improve the algorithm
-5. Tuning
+5. Tuning and documentation
+6. Repeat from 2.
 
 **Principles:**
 - Quality before quantity: Good performance over many different algorithm
