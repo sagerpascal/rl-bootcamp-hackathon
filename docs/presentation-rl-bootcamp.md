@@ -18,13 +18,19 @@ paginate: true
     background-color: #0064A6;
     color: white;
     font-size: 1.6em;
-    background-image: url("https://lh3.googleusercontent.com/proxy/x04EA4RhDz_One5GheU5HN7NR-NjI6mR5rDj8SW2CgiHd83RIi_Kl6bXM5VPh8USIqUgDYIgU388XIOEmR9wfJU9sYLBW9w4SYgbp2z-7KcePihTmQ");
+    background-image: url("https://lh3.googleusercontent.com/proxy/IY_lk6EmHAdYnuRwXYzOQMbDB-pz8Kh7cxczaMVEfSm7Y9vh5cWQTX106cJN2lZ8hG4dr5k9AsCBCfzRimp13FthcV7kJg-wanB7uxok8uiJ8Ydxig");
     background-repeat: no-repeat;
     background-position: right;
     background-size: 14%;
 }
 section {
     padding-top: 120px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 </style>
@@ -66,7 +72,7 @@ I have created a **detailed documentation on Github Pages**: [https://sagerpasca
 Selection of the Algorithms
 </div>
 
-- **Inverse RL** was not considered, because the reward function is defined by the environment
+- **Inverse RL** was not considered, because the reward function is well defined by the environment
 - **Model-Based vs. Model-Free**: Has the agent access to (or learns) a model of the environment (model = function which predicts state transitions and rewards)
 $\rightarrow$ **model free algorithms used**
 - **What to learn**:
@@ -79,8 +85,8 @@ $\rightarrow$ **model free algorithms used**
 Selection of the Algorithms
 </div>
 
-![](https://spinningup.openai.com/en/latest/_images/rl_algorithms_9_15.svg)
 
+<img src="https://spinningup.openai.com/en/latest/_images/rl_algorithms_9_15.svg"  class="center">
 
 ---
 
@@ -88,9 +94,17 @@ Selection of the Algorithms
 Brief Explanation of the Algorithms
 </div>
 
-#### Deep Q-Learning (Double Q-Learning)
+#### Double Deep Q-Network (Double DQN)
 - Collect rollouts in a replay buffer $\rightarrow$ approximate the Q-Value function $Q(S,A)$
-- Prediction Network executes steps in environment, Target network calculates gradients on "frozen" parameters
+
+
+<img src="img_presentation\alg_dqn.png" alt="algorithm" style="height:88%; width:60%" class="center"/>
+
+---
+
+<div class=custom-header>
+Brief Explanation of the Algorithms
+</div>
 
 #### Clip Proximal Policy Optimization
 - Tries to make the biggest possible policy improvment step without causing a performance collapse

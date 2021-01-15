@@ -293,7 +293,7 @@ def train(env, conf):
         loss_values_minibatch = []
         batch_indexes = np.arange(nbatch)
         for _ in range(conf['noptepochs']):
-            np.random.shuffle(batch_indexes)  # shuffle -> improves performance!!!
+            np.random.shuffle(batch_indexes)
             for start in range(0, nbatch, nbatch_train):
                 end = start + nbatch_train
                 i = batch_indexes[start:end]
