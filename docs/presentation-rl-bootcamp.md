@@ -131,7 +131,7 @@ Brief Explanation of the Algorithms
 Brief Explanation of the Algorithms
 </div>
 
-#### Advantage Actor-Critic
+#### Advantage Actor-Critic (A2C)
 
 - Similar to PPO, but without clipping and with policy entropy
 
@@ -144,7 +144,7 @@ Brief Explanation of the Algorithms
 </div>
 
 
-#### Deep Deterministic Policy Gradient
+#### Deep Deterministic Policy Gradient (DDPG)
 
   - Collect rollouts (as for DQN)
   - **Two prediction networks**: Actor and Critic (as for Q-Actor-Critic)
