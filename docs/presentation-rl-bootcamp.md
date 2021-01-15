@@ -48,6 +48,7 @@ Content
 </div>
 
 - Documentation
+- Environment
 - Selection of the Algorithms
 - Brief Explanation of the Algorithms
 - Results
@@ -65,6 +66,18 @@ I have created a **detailed documentation on Github Pages**: [https://sagerpasca
 <br>
 
 *This presentation is only a summary of the documentation.*
+
+
+---
+
+<div class=custom-header>
+Environment
+</div>
+
+### Lunar-Lander
+
+
+
 
 ---
 
@@ -133,8 +146,8 @@ Brief Explanation of the Algorithms
 #### Deep Deterministic Policy Gradient
 
   - Collect rollouts (as for DQN)
-  - Two prediction networks: Actor and Critic (as for Q-Actor-Critic)
-  - Two target networks: Target-Actor and TargetCritic (as for DQN)
+  - **Two prediction networks**: Actor and Critic (as for Q-Actor-Critic)
+  - **Two target networks**: Target-Actor and Target-Critic (as for DQN)
   - Learns concurrently a Q-function and a policy
   - Uses off-policy data and the Bellman equation to learn the Q-function, and uses the Q-function to learn the policy
 
@@ -160,11 +173,11 @@ Conclusion and Outlook
 ### Algorithm
 - **DQN**: Very sample efficient but less stable, reached a pretty high avgerage score
 - **PPO**: Very stable, took longer to win the game
-- **A2C**: The proof that Policy Optimization can also win the game fast (with a little luck)
+- **A2C**: The proof that Policy Optimization can also win fast (with a little luck)
 
 ### Next Steps
-- Finish DDPG and win Lunar-Landing continous
-- Cleanup Code
+- Finish DDPG and win Lunar-Landing with continous action space
+- Cleanup code
 - Run sweeps
 - ...
 
