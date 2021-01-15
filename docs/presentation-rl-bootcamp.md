@@ -98,7 +98,7 @@ Brief Explanation of the Algorithms
 - Collect rollouts in a replay buffer $\rightarrow$ approximate the Q-Value function $Q(S,A)$
 
 
-<img src="\rl-bootcamp-hackathon\assets\images\presentation\alg_dqn.png" alt="algorithm" style="height:88%; width:60%" class="center"/>
+<img src="\rl-bootcamp-hackathon\assets\images\presentation\alg_dqn.PNG" alt="algorithm" style="height:88%; width:60%" class="center"/>
 
 ---
 
@@ -109,7 +109,7 @@ Brief Explanation of the Algorithms
 #### Clip Proximal Policy Optimization (Clip PPO2)
 - Use on-policy value function $V^{\pi}(s)$ to figure out how to update the policy $\pi_{\theta}(a|s)$
 
-<img src="\rl-bootcamp-hackathon\assets\images\presentation\alg_ppo.png" alt="algorithm" style="height:88%; width:65%" class="center"/>
+<img src="\rl-bootcamp-hackathon\assets\images\presentation\alg_ppo.PNG" alt="algorithm" style="height:88%; width:65%" class="center"/>
 
 ---
 
@@ -121,7 +121,7 @@ Brief Explanation of the Algorithms
 
 - Similar to PPO, but without clipping and with policy entropy
 
-<img src="\rl-bootcamp-hackathon\assets\images\presentation\alg_a2c.png" alt="algorithm" style="height:88%; width:75%" class="center"/>
+<img src="\rl-bootcamp-hackathon\assets\images\presentation\alg_a2c.PNG" alt="algorithm" style="height:88%; width:75%" class="center"/>
 
 ---
 
