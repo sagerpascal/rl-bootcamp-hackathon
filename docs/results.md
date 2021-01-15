@@ -31,6 +31,9 @@ For example, DQN takes many episodes even though the game is won in 10 minutes. 
 | PPO2         | 22min 15s (Tesla T4)   | 245                 |
 | A2C          |  4min 40s (GTX 1060)   | 226                 |
 
+<br>
+<br>
+
 ### Results LunarLanderContinuous-v2
 
 | **Network**  | **Duration until Won** | **Max. mean Score** |
@@ -38,6 +41,7 @@ For example, DQN takes many episodes even though the game is won in 10 minutes. 
 | DDPG         | Not won yet!           | 0                   |
 
 
+<br>
 
 ## Results of the different Algorithms:
 - [Results DQN](/rl-bootcamp-hackathon/results_dqn)
