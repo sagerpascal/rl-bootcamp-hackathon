@@ -1,9 +1,9 @@
-algorithm: a2c
+algorithm: ppo2
 log_console_freq: 100 # 300 for DQN/A2C, 1 for PPO2
 log_wandb_freq: 100 # 1000 for DQN/A2C, 1 for PPO2
-use_wandb: True
-mode: train  # either train or val
-num_env: 20  # number of envs in parallel -> 9 for a2c, 1 for deepq
+use_wandb: False
+mode: val  # either train or val
+num_env: 1  # number of envs in parallel -> 9 for a2c, 1 for deepq
 
 #algorithm: ppo2
 #log_console_freq: 1 # 300 for DQN/A2C, 1 for PPO2
