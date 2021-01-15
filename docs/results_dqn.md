@@ -90,3 +90,9 @@ Additionally, other hyperparameters such as the batch size should also be examin
 DQN achieves good results relatively quickly, but one problem is stability. After the game is won for the first time, the algorithm has strong fluctuations. So far, it has not been found out what exactly causes this. Some modifications like the adjustment of the loss function have reduced these fluctuations, but they are still strong.
 
 <img src="\rl-bootcamp-hackathon\assets\images\deepq\stability.png" alt="stability"/>
+
+# Video of the Result
+<video width="600" height="450" controls>
+  <source src="\rl-bootcamp-hackathon\assets\videos\deepq\deepq.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>

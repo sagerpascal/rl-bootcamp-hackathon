@@ -76,3 +76,8 @@ I tried different hyperparameters, but did not do any tuning with grid search or
 **Different Learning Rate:**
 <img src="\rl-bootcamp-hackathon\assets\images\a2c\different_lr.png" alt="different_lr"/>
 
+# Video of the Result
+<video width="600" height="450" controls>
+  <source src="\rl-bootcamp-hackathon\assets\videos\a2c\a2c.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>

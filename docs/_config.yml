@@ -10,7 +10,7 @@ exclude:
 
 # Site settings
 url: 'https://sagerpascal.github.io/rl-bootcamp-hackathon/'
-baseurl: 'rl-bootcamp-hackathon/'
+baseurl: '/rl-bootcamp-hackathon'
 title: 'Reinforcment Learning Hackathon @ZHAW'
 description: 'Results from Pascal Sager'
 permalink: pretty

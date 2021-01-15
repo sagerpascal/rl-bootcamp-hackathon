@@ -93,4 +93,8 @@ One advantage of PPO compared to DQN is the stability. The reward increases slow
 *Run over 4.5h*
 <img src="\rl-bootcamp-hackathon\assets\images\ppo2\stability.png" alt="stability"/>
 
-
+# Video of the Result
+<video width="600" height="450" controls>
+  <source src="\rl-bootcamp-hackathon\assets\videos\ppo2\ppo2.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
