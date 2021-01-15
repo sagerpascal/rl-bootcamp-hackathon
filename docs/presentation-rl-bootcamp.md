@@ -74,10 +74,12 @@ I have created a **detailed documentation on Github Pages**: [https://sagerpasca
 Environment
 </div>
 
-### Lunar-Lander
+### LunarLander-V2
+- Land between the two flags
 
+<img src="https://user-images.githubusercontent.com/48079888/93164280-23663300-f6e7-11ea-8cf9-e049d887a4ca.gif" style="width:500px; height:300px" class="center">
 
-
+- **Points**: Speed, landing position, usage of engine
 
 ---
 
