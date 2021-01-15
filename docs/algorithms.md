@@ -8,6 +8,7 @@ permalink: /algorithms
 - [Home](/rl-bootcamp-hackathon)
 - [Procedure](/rl-bootcamp-hackathon/procedure)
 - [Results](/rl-bootcamp-hackathon/results)
+- [Conclusion](/rl-bootcamp-hackathon/conclusion)
 - [Presentation](/rl-bootcamp-hackathon/presentation)
 
 

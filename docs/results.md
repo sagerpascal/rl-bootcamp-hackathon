@@ -13,6 +13,7 @@ permalink: /results
   - [Results PPO](/rl-bootcamp-hackathon/results_ppo2)
   - [Results A2C](/rl-bootcamp-hackathon/results_a2c)
   - [Results DDPG](/rl-bootcamp-hackathon/results_ddpg)
+- [Conclusion](/rl-bootcamp-hackathon/conclusion)
 - [Presentation](/rl-bootcamp-hackathon/presentation)
 
 # Results

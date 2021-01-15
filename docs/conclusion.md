@@ -27,6 +27,9 @@ PPO achieved a very stable result, but it took much more time than DQN. I did no
 
 I was a little lucky with A2C. Under normal circumstances, A2C was also very stable. But since it doesn't have clipping like PPO, it can become unstable more easily. Due to this instability, certain parameters let the reward fast increase to a reward >200 points (for a few hundred episodes). This reward could then not be kept over a longer time like with PPO. Thus I could show that policy optimization methods can also win the game quickly. In the "normal" setup, however, A2C is also very stable and then has a little longer to win the game.
 
+### DDPG
+Unfortunately, the algorithm is not yet fully implemented. 
+
 ## Personal Conclusion / Feeling
 Personally, I think that I have achieved a very good result in this short time. Not only did I win the game, but I also 
 achieved the 200 points in a very good time. Nevertheless, there is of course a lot of potential for improvement. However,

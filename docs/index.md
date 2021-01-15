@@ -7,6 +7,7 @@ permalink: /
 - How I tackled the problem: [Procedure](/rl-bootcamp-hackathon/procedure)
 - The different algorithms I used: [Algorithms](/rl-bootcamp-hackathon/algorithms)
 - The results I obtained: [Results](/rl-bootcamp-hackathon/results)
+- My findings: [Conclusion](/rl-bootcamp-hackathon/conclusion)
 - My final presentation: [Presentation](/rl-bootcamp-hackathon/presentation)
 
 # About this Page
