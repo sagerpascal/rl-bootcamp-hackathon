@@ -52,7 +52,6 @@ Content
 - Selection of the Algorithms
 - Brief Explanation of the Algorithms
 - Results
-- Performance
 - Conclusion and Outlook
 
 ---
