@@ -98,7 +98,7 @@ Brief Explanation of the Algorithms
 - Collect rollouts in a replay buffer $\rightarrow$ approximate the Q-Value function $Q(S,A)$
 
 
-<img src="img_presentation\alg_dqn.png" alt="algorithm" style="height:88%; width:60%" class="center"/>
+<img src="\rl-bootcamp-hackathon\assets\images\presentation\alg_dqn.png" alt="algorithm" style="height:88%; width:60%" class="center"/>
 
 ---
 
@@ -106,27 +106,41 @@ Brief Explanation of the Algorithms
 Brief Explanation of the Algorithms
 </div>
 
-#### Clip Proximal Policy Optimization
-- Tries to make the biggest possible policy improvment step without causing a performance collapse
-- Two policy networks: one to refine the policy and one to collect samples $\rightarrow$ networks are synchronized after a specific intervall
+#### Clip Proximal Policy Optimization (Clip PPO2)
+- Use on-policy value function $V^{\pi}(s)$ to figure out how to update the policy $\pi_{\theta}(a|s)$
 
+<img src="\rl-bootcamp-hackathon\assets\images\presentation\alg_ppo.png" alt="algorithm" style="height:88%; width:65%" class="center"/>
 
 ---
 
 <div class=custom-header>
 Brief Explanation of the Algorithms
 </div>
-
-#### Deep Deterministic Policy Gradient
-> TODO überarbeiten
-- Learns concurrently a Q-function and a policy
-- Uses off-policy data and the Bellman equation to learn the Q-function, and uses the Q-function to learn the policy
 
 #### Advantage Actor-Critic
-> TODO überarbeiten
-- Actor: Performs the action in the environment
-- Critic: Estimates how valuable a specific action is
 
+- Similar to PPO, but without clipping and with policy entropy
+
+<img src="\rl-bootcamp-hackathon\assets\images\presentation\alg_a2c.png" alt="algorithm" style="height:88%; width:75%" class="center"/>
+
+---
+
+<div class=custom-header>
+Brief Explanation of the Algorithms
+</div>
+
+
+#### Deep Deterministic Policy Gradient
+
+  - Collect rollouts (as for DQN)
+  - Two prediction networks: Actor and Critic (as for Q-Actor-Critic)
+  - Two target networks: Target-Actor and TargetCritic (as for DQN)
+  - Learns concurrently a Q-function and a policy
+  - Uses off-policy data and the Bellman equation to learn the Q-function, and uses the Q-function to learn the policy
+
+<br>
+
+**Algorithm not finished yet!**
 
 ---
 
@@ -134,17 +148,10 @@ Brief Explanation of the Algorithms
 Results
 </div>
 
-TODO
+[https://sagerpascal.github.io/rl-bootcamp-hackathon/results](https://sagerpascal.github.io/rl-bootcamp-hackathon/results)
 
 ---
 
-<div class=custom-header>
-Performance
-</div>
-
-TODO
-
----
 
 <div class=custom-header>
 Conclusion and Outlook
@@ -152,3 +159,6 @@ Conclusion and Outlook
 
 TODO
 
+---
+
+# Discussion
