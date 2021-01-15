@@ -157,7 +157,16 @@ Results
 Conclusion and Outlook
 </div>
 
-TODO
+### Algorithm
+- **DQN**: Very sample efficient but less stable, reached a pretty high avgerage score
+- **PPO**: Very stable, took longer to win the game
+- **A2C**: The proof that Policy Optimization can also win the game fast (with a little luck)
+
+### Next Steps
+- Finish DDPG and win Lunar-Landing continous
+- Cleanup Code
+- Run sweeps
+- ...
 
 ---
 
