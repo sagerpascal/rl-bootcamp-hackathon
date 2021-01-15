@@ -49,6 +49,7 @@ Content
 
 - Documentation
 - Environment
+- Procedure
 - Selection of the Algorithms
 - Brief Explanation of the Algorithms
 - Results
